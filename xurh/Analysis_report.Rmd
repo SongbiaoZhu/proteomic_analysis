@@ -1,0 +1,118 @@
+---
+title: "Analysis_report"
+author: "Songbiao Zhu"
+date: "`r Sys.Date()`"
+output: word_document
+---
+
+```{r setup, include=FALSE, warning = FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = FALSE,comment = "" )
+```
+
+## Introduction
+
+TMT-based quantative proteomic analysis of lung adenocarcinoma clinical samples, including three paired tumor and adjacent normal tissues.
+
+
+```{r,echo=FALSE}
+rm(list = ls())
+load("output_step1.RData")
+load("output_step5.RData")
+info.number <- rbind(
+  c("total proteins",dim(dat)[1]),
+  c("score>5 proteins",dim(subset(dat, Score > 5))[1]),
+  c("score>10 proteins",dim(subset(dat, Score > 10))[1]),
+  c("uni. pep>=2 proteins",dim(dat2_uni2)[1]),
+  c("DEPs",summary(dat4_dep$threshold)[2]),
+  c("Upregulated DEPs",table(dat4_dep$regulation)[3]),
+  c("Downregulated DEPs",table(dat4_dep$regulation)[1])
+)
+info.number <- as.data.frame(info.number)
+colnames(info.number) <- c("Filters", "Protein number")
+# File information summary
+info.table <- rbind(
+  c("dat_Proteins.xlsx","PD_exported"),
+  c("dat1_symbol.xlsx","Proteins_with_Symbol"),
+  c("deps_proteins.xlsx","Differentially expressed proteins"),
+  c("deps_up_proteins.xlsx","Up-regulated proteins"),
+  c("deps_down_proteins.xlsx","Down-regulated proteins"),
+  c("gsea_c5_sort.xlsx","GSEA enriched results"),
+  c("forIPA.xlsx","for_IPA_analysis"),
+  c("upDEPs_accession.txt","UpDEPs_Accession_for_GO"),
+  c("downDEPs_accession.txt","DownDEPs_Accession_for_GO"),
+  c("upDEPs_Symbol.txt","upDEPs_Symbol_for_GO"),
+  c("downDEPs_Symbol.txt","downDEPs_Symbol_for_GO"),
+  c("forPSEA.txt","for_PSEA_analysis"),
+  c("S1.Table.xlsx","S1.Table.Upregulatedproteinslist"),
+  c("S2.Table.xlsx","S2.Table.Downregulatedproteinslist")
+)
+info.table <- as.data.frame(info.table)
+colnames(info.table) <- c("File name", "File description")
+```
+
+**Protein numbers with different filters**
+
+```{r,}
+library(knitr)
+kable(info.number)
+```
+
+**Description of result files**
+```{r,}
+library(knitr)
+kable(info.table)
+
+```
+
+## Summary of identification result
+
+**protein score distribution**
+
+![protein scores distribution plot.](res/score_dist.jpeg)
+
+
+![protein scores bar plot.](res/score_bar.jpeg)
+
+
+
+**protein coverage distribution**
+
+![protein coverage bar plot.](res/coverage_bar.jpeg)
+
+
+**Unique peptides number distribution**
+
+![Distribution of unique peptides number.](res/unipep_dist.jpeg)
+
+
+![Unique peptides number bar plot.](res/unipep_bar.jpeg)
+
+
+## Summary of quantification result
+
+![Reproducibility of two replicates.](res/repeat_scatter.jpeg)
+
+![Reproducibility of every two replicates.](res/reprodu_pairs.jpeg)
+
+![Relative variation statistics for cutoff threshold setting.](res/rel.var_bar_pub.jpeg)
+
+Based on the 88% coverage requirement for biological replicates experiment, the cutoff threshold should be set at `r fc_cut`.
+
+## Diffentially expressed proteins
+![volcano plot showing the differentially expressed proteins.](res/volcano_text_blue.jpeg)
+
+## GO enrichment analysis
+
+![GO enrichment result of up-regulated proteins.](res/kk.up.dotplot.jpeg)
+
+![GO enrichment result of down-regulated proteins.](res/kk.down.dotplot.jpeg)
+
+
+## KEGG enrichment analysis
+
+![KEGG pathway enrichment analysis of up- (red) and down-regulated proteins (blue).](res/kegg_up_down.jpeg)
+
+## GSEA enrichment analysis
+The GSEA enriched signatures were listed in file "gsea_c5_sort.xlsx".
+The top three enriched signatures were showed in figure below.
+![The top three enriched GSEA items of all quantified proteins.](res/gsea_top3_signature.jpeg)
