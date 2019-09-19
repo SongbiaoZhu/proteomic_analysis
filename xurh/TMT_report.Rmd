@@ -1,0 +1,68 @@
+---
+title: "TMT_report"
+author: "Songbiao Zhu"
+date: August 26, 2019
+output: powerpoint_presentation
+---
+
+
+## Introduction
+
+TMT-based quantative proteomic analysis of lung adenocarcinoma clinical samples, including three paired tumor and adjacent normal tissues.
+
+## Description of result files
+
+
+## Summary of identification result
+
+## protein score distribution
+
+![protein scores distribution plot.](res/score_dist.jpeg)
+
+
+![protein scores bar plot.](res/score_bar.jpeg)
+
+
+
+## protein coverage distribution
+
+![protein coverage bar plot.](res/coverage_bar.jpeg)
+
+
+## Unique peptides number distribution
+
+![Distribution of unique peptides number.](res/unipep_dist.jpeg)
+
+
+![Unique peptides number bar plot.](res/unipep_bar.jpeg)
+
+
+## Summary of quantification result
+
+![Reproducibility of two replicates.](res/repeat_scatter.jpeg)
+
+![Reproducibility of every two replicates.](res/reprodu_pairs.jpeg)
+
+![Relative variation statistics for cutoff threshold setting.](res/rel.var_bar_pub.jpeg)
+
+Based on the 88% coverage requirement for biological replicates experiment, the cutoff threshold should be set at 1.5.
+
+## Diffentially expressed proteins
+![volcano plot showing the differentially expressed proteins.](res/volcano_text_blue.jpeg)
+
+## GO enrichment analysis
+
+![GO enrichment result of up-regulated proteins.](res/kk.up.dotplot.jpeg)
+
+![GO enrichment result of down-regulated proteins.](res/kk.down.dotplot.jpeg)
+
+
+## KEGG enrichment analysis
+
+![KEGG pathway enrichment analysis of up- (red) and down-regulated proteins (blue).](res/kegg_up_down.jpeg)
+
+
+## GSEA enrichment analysis
+The GSEA enriched signatures were listed in file "gsea_c5_sort.xlsx".
+The top three enriched signatures were showed in figure below.
+![The top three enriched GSEA items of all quantified proteins.](res/gsea_top3_signature.jpeg)
