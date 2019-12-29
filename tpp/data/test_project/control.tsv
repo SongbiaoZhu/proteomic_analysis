@@ -1,0 +1,3 @@
+name	sample	data_file	meta_file
+C1	Control	data/control.tsv	meta/control.tsv
+T1	Treated	data/treated.tsv	meta/treated.tsv
